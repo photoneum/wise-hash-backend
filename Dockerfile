@@ -3,20 +3,20 @@ FROM node:22.11.0-slim
 # Create app directory
 WORKDIR /usr/src/app
 
-# Copy package.json and package-lock.json
+# Copy package files
 COPY package*.json ./
 
-# Install app dependencies
+# Install dependencies
 RUN npm ci
 
-# Bundle app source
+# Copy source files
 COPY . .
 
-# Build the TypeScript files
+# Build TypeScript
 RUN npm run build
 
-# Expose port 8080
-EXPOSE 8080
+# Expose port
+EXPOSE 4000
 
-# Start the app
-CMD npm run start
+# Use a different command to ensure we're in the right directory
+CMD ["node", "dist/index.js"]
