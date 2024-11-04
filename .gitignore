@@ -24,3 +24,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+.vercel
+*.db*
+wise-hash.db
