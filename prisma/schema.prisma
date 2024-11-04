@@ -29,7 +29,49 @@ model User {
   updatedAt     DateTime @updatedAt
 
   // For OTP verification
-  otpSecret  String?
-  otpExpiry  DateTime?
-  isVerified Boolean   @default(false)
+  otpSecret        String?
+  otpExpiry        DateTime?
+  isVerified       Boolean            @default(false)
+  SupplyChainEvent SupplyChainEvent[]
+}
+
+model SupplyChainEvent {
+  id                   Int      @id @default(autoincrement())
+  eventId              String   @unique @default(uuid())
+  productName          String
+  originLocation       String
+  destinationLocation  String
+  timestamp            DateTime @default(now())
+  productType          String
+  weight               Float
+  otherProductData     String?
+  numberOfExchanges    Int
+  expectedDeliveryDate DateTime
+  insuranceProvider    String
+  coverageType         String
+  status               String   @default("PENDING")
+
+  // Relations
+  owner        User                 @relation(fields: [ownerId], references: [id])
+  ownerId      Int
+  participants ParticipantInEvent[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ParticipantInEvent {
+  id                 Int    @id @default(autoincrement())
+  name               String
+  contactInformation String
+  role               String
+
+  // Relations
+  event   SupplyChainEvent @relation(fields: [eventId], references: [id])
+  eventId Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([eventId, role])
 }

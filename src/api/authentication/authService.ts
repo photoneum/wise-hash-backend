@@ -49,7 +49,6 @@ export class AuthService {
 
       return ServiceResponse.success("OTP sent successfully", null, StatusCodes.OK);
     } catch (error) {
-      console.log("🚀 ~ AuthService ~ initiateLogin ~ error:", error);
       return ServiceResponse.failure("Failed to initiate login", null, StatusCodes.INTERNAL_SERVER_ERROR);
     }
   }
