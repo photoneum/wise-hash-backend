@@ -7,17 +7,5 @@ services:
       dockerfile: Dockerfile
     ports:
       - "4000:4000"
-    environment:
-      - NODE_ENV=development
-      - HOST=0.0.0.0
-      - PORT=4000
-      - CORS_ORIGIN=http://localhost:3000
-      - COMMON_RATE_LIMIT_MAX_REQUESTS=1000
-      - COMMON_RATE_LIMIT_WINDOW_MS=1000
-    # For production, remove volumes completely
-    # For development, use this volume configuration:
-    volumes:
-      - ./src:/usr/src/app/src
-      - ./package.json:/usr/src/app/package.json
-      - ./package-lock.json:/usr/src/app/package-lock.json
-      - ./tsconfig.json:/usr/src/app/tsconfig.json
+    env_file:
+      - .env

@@ -12,8 +12,14 @@ RUN npm ci
 # Copy source files
 COPY . .
 
+# Install openssl
+RUN apt-get update && apt-get install -y openssl
+
 # Build TypeScript
 RUN npm run build
+
+# Generate Prisma client
+RUN npx prisma generate
 
 # Expose port
 EXPOSE 4000

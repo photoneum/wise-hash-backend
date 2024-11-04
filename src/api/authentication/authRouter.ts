@@ -21,7 +21,7 @@ authRegistry.registerPath({
     body: {
       content: {
         "application/json": {
-          schema: LoginSchema,
+          schema: LoginSchema.shape.body,
         },
       },
     },
