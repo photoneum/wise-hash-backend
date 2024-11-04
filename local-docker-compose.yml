@@ -7,13 +7,16 @@ services:
       dockerfile: Dockerfile.local
     ports:
       - "4000:4000"
-    environment:
-      - NODE_ENV=development
-      - HOST=0.0.0.0
-      - PORT=4000
-      - CORS_ORIGIN=http://localhost:3000
-      - COMMON_RATE_LIMIT_MAX_REQUESTS=1000
-      - COMMON_RATE_LIMIT_WINDOW_MS=1000
+    env_file:
+      - .local-docker-env
+      
+    # environment:
+    #   - NODE_ENV=development
+    #   - HOST=0.0.0.0
+    #   - PORT=4000
+    #   - CORS_ORIGIN=http://localhost:3000
+    #   - COMMON_RATE_LIMIT_MAX_REQUESTS=1000
+    #   - COMMON_RATE_LIMIT_WINDOW_MS=1000
     # For production, remove volumes completely
     # For development, use this volume configuration:
     volumes:
